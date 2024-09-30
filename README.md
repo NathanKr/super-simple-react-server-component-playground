@@ -1,12 +1,10 @@
+<h2>Project Description</h2>
+.........
 
+<h2>Motivation</h2>
+Super simple example of using react server component and react client component
 
-<h2 id="project-description">Project Description</h2>
-<p>A concise and informative summary of the project's purpose, key features, and target audience.</p>
-
-<h2 id="motivation">Motivation</h2>
-Super simple example of using react server component
-
-<h2 id="installation">Installation</h2>
+<h2>Installation</h2>
 
 ```bash
 pnpm i
@@ -14,43 +12,70 @@ pnpm i
 
 
 <h2 id="usage">Usage</h2>
-
+Invoke this to run the development server
 
 ```bash
 npm run dev
 ```
 
+This is the home page
 
-<h2 id="technologies-used">Technologies Used</h2>
-next.js app router
+```ts
+export default function Home() {
+  return (
+    <div>
+      <ServerComponentHelloWorld />
+      <ClientComponentHelloWorld />
+    </div>
+  );
+}
+```
 
-<h2 id="code-structure">Code Structure</h2>
-<p>An explanation of the project's code structure, including important files and directories.</p>
 
-<h2 id="demo">Demo</h2>
-<p>A link to a live demo or a GIF/video showcasing the project's functionality.</p>
-<ul>
-    <li>Live demo link</li>
-    <li>GIF or video demonstration</li>
-</ul>
+<h2>Server component</h2>
+In next.js by default a component is server component
 
-<h2 id="points-of-interest">Points of Interest</h2>
-<ul>
-    <li>Innovative features</li>
-    <li>Technical challenges and solutions</li>
-    <li>Lessons learned</li>
-</ul>
+```ts
+const ServerComponentHelloWorld : FC = () => {
+    console.log('Hello world server component');
+    return (
+            <h2>Hello world server component</h2>
+    );
+};
+```
 
-<h2>Open issues</h2>
-<ul>
-    <li>I am expecting to see the 'Hello world server component' of ServerComponentHelloWorld in view source but not 'Hello world client component' of ClientComponentHelloWorld. But in fact i see them both <img src='./figs/view-source-open-issue.png'/> why ?</li>
-    <li>I am expecting to see in the browser console only 'Hello world client component' and thats what i get <img src='./figs/console-log-browser.png'/> but on the vscode (server?) console i expect to see only the console log of  'Hello world server component'  but i see also 'Hello world client component' check <img src='./figs/vscode-server-console.png'/> - why</li>
-</ul>
+<h2>Client component</h2>
+The directive "use client" is used to mark a component as client component 
+
+```ts
+"use client"
+import { FC } from "react";
+const ClientComponentHelloWorld : FC = () => {
+    console.log('Hello world client component');
+    return (
+            <h2>Hello world client component</h2>
+    );
+};
+```
+
+
+<h2>Demo - Browser</h2>
+
+<img src='./figs/demo-main.png'/>
+
+
+<h2>Demo - View source</h2>
+<p>I was expecting to see the 'Hello world server component' of ServerComponentHelloWorld in view source but not 'Hello world client component' of ClientComponentHelloWorld. But in fact i see them both <img src='./figs/view-source-open-issue.png'/> why ?</p>
+<p>This is because react will try to convert the component to html if possible . In this case 'Hello world client component' is static so it can be converted to html on the server and sent to the browser - thats why we see it in view source</p>
+
+<h2>Demo - Console</h2>
+<p>I was expecting to see in the browser console only 'Hello world client component' and thats what i get <img src='./figs/console-log-browser.png'/> On the vscode server terminal i expect to see only the console log of 'Hello world server component'  but i see also 'Hello world client component' check <img src='./figs/vscode-server-console.png'/> - why ?</p>
+<p>What i have explained about view source is the answer also here </p>
+
 
 <h2 id="references">References</h2>
 <ul>
-    <li>External libraries or frameworks</li>
-    <li>Articles or tutorials</li>
-    <li>Other relevant resources</li>
+    <li><a href='https://github.com/reactwg/server-components/discussions/4'> Why do Client Components get SSR'd to HTML?</a>- Dan Abramov , June 2023</li>
+    <li><a href='https://react.dev/reference/rsc/server-components'>server component - react offical docs</a></li>
 </ul>
 
